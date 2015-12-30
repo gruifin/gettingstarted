@@ -20,12 +20,13 @@ under the License.
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><%= current_page.data.title || "API Documentation" %></title>
+    <title><%= current_page.data.title || "The Things Network Documentation" %></title>
 
     <%= favicon_tag '/images/favicon.ico' %>
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <%= stylesheet_link_tag "3col", media: :all %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <% if current_page.data.search %>
       <%= javascript_include_tag  "all" %>
     <% else %>
@@ -49,36 +50,18 @@ under the License.
       </span>
     </a>
     <div class="tocify-wrapper">
-      <%= image_tag "TheThingsRond.png" %>
-      <p id="GettingStarted">Getting Started</p>
-      <div class="separator separator-top"></div>
-      <!--div class="platform-nav"-->
-        <!--div class="nav-label">Platform</div-->
-        <!--div class="platform-selector btn-group">
-          <button class="btn btn-default" data-platform-name="ios">iOS</button>
-          <button class="btn btn-default" data-platform-name="android">Android</button>
-          <button class="btn btn-default" data-platform-name="web">Web</button>
-        </div-->
-        <!--div class="clear"></div-->
-        <% if language_tabs %>
-          <!--div class="nav-label">Language</div>
-            <div class="btn-group">
-              <button class="btn btn-default language-dropdown">Objective-C</button>
-              <div class="arrow-down"></div>
-              <div class="lang-selector">
-                <% language_tabs.each do |lang| %>
-                  <% if lang.is_a? Hash %>
-                    <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-                  <% else %>
-                    <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-                  <% end %>
-                <% end %>
-              </div>
-            <div class="clear"></div>
-          </div-->
-        <% end %>
-      <!--/div-->
-      <!--div class="separator"></div-->
+      <%= image_tag "api_logo.png" %>
+      <% if language_tabs %>
+        <div class="lang-selector">
+          <% language_tabs.each do |lang| %>
+            <% if lang.is_a? Hash %>
+              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+            <% else %>
+              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
       <% if current_page.data.search %>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -100,7 +83,7 @@ under the License.
       <div class="content">
         <%= yield %>
         <% current_page.data.includes && current_page.data.includes.each do |include| %>
-          <%= partial("includes/#{include}", :locals => { :api_docs_link => current_page.data.api_docs_link }) %>
+          <%= partial "includes/#{include}" %>
         <% end %>
       </div>
       <div class="dark-box">

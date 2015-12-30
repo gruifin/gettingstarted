@@ -1,8 +1,17 @@
 ---
-title: The Things Network Getting Started
+title: Smooch Documentation
+
+language_tabs:
+  - objective_c
+  - swift
 
 toc_footers:
-  - <a href='http://www.thethingsnetwork.org'>Want to know more about The Things Network?</a>
+  - <a href='http://smooch.io/'>Sign up for Smooch, it's free</a>
+  - <br/>
+  - <a href='/ios'>iOS Guide</a> | <a href='/api/ios'>Class Reference</a>
+  - <a href='/android'>Android Guide</a> | <a href='/api/android'>Class Reference</a>
+  - <a href='/javascript'>Web Guide</a> | <a href='https://github.com/smooch/smooch-js' target="_blank">Class Reference</a>
+  - <a href='/rest'>REST API Reference</a>
 
 includes:
   - welcome
