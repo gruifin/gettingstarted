@@ -6,39 +6,11 @@ toc_footers:
 
 includes:
   - welcome
-  - references
-  - adding_smooch_ios
-  - configuring_push_ios
-
-  - users/users
-  - users/user_data_intro
-  - users/user_data_ios
-  - users/user_data_aside
-  - users/sensitive_user_data
-  - users/users_on_multiple_devices
-  - users/authenticating_users
-
-  - sending_action_buttons
-
-  - integrations/integrations
-  - integrations/email
-  - integrations/slack
-  - integrations/helpscout
-  - integrations/hipchat
-  - integrations/zendesk
-  - integrations/twilio
-  - integrations/connecting_crm
-
-  - getting_conversations_started
-  - whispers/whisper_when
-  - whispers/whisper_actions
-  - whispers/whisper_manage
-
-  - localization
-
-  - customization/string_customization
-  - customization/styling_conversations
+  - network
+  - community
+  - applications
+  - devices
 
 search: true
-api_docs_link: http://docs.smooch.io/api
+api_docs_link: http://gettingstarted.thethingsnetwork.org
 ---
