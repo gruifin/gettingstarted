@@ -7,9 +7,9 @@ toc_footers:
 includes:
   - welcome
   - network
-  - data
   - applications
   - devices
+  - data
   - community
 
 search: true
