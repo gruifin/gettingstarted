@@ -50,55 +50,23 @@
       <div class="content">
         
           <h1 id='welcome'>Welcome</h1>
-<p>Smooch lets you have rich conversations with your users, right in your app or on your website. If you want to learn more about Smooch, then visit our website at <a href="http://smooch.io">http://smooch.io</a> or <a href="https://app.smooch.io">sign up here</a>. This page provides in-depth documentation on Smooch&rsquo;s features and is meant to be a guide for developers integrating the SDK and app makers seeking to engage with their users.</p>
+<p>This page tells you all about gettings started with The Things Network.</p>
 
-<p>Source code examples are provided for all of our SDKs, including both Objective-C and Swift for iOS. You can view code examples inline, and you can switch the programming language of the examples with the tabs in the top left.</p>
+<p>*How to build the network
+*Connecting devices
+*Building applications
+*Retrieving your data
+*Building a local community</p>
 
-<p>If you have any other questions, feel free to reach out to us <a href="mailto:help@smooch.io">here</a>.</p>
+          <h1 id='setting-up-the-network'>Setting up the Network</h1>
+<p>This section will tell something about setting up the network. The nature of this guide is technical.</p>
 
-          <h1 id='references'>References</h1>
-<p>For more in-depth details on Smooch&rsquo;s APIs check out our API Reference documentation. The API reference documents every method and property available through Smooch.</p>
-
-<ul>
-<li><a href="http://docs.smooch.io/api/ios" target="_blank">iOS SDK Reference</a></li>
-<li><a href="http://docs.smooch.io/api/android" target="_blank">Android SDK Reference</a></li>
-<li><a href="https://github.com/smooch/smooch-js" target="_blank">Web SDK Reference</a></li>
-<li><a href="/rest" target="_blank">REST API</a></li>
-</ul>
-<h2 id='upgrading-to-smooch'>Upgrading to Smooch</h2>
-<p>Upgrading the SDKs to Smooch requires some changes to your existing code. These changes are documented in our upgrade guides:</p>
-
-<ul>
-<li><a href="https://github.com/smooch/smooch-ios/releases/tag/v3.0.0" target="_blank">iOS Upgrade Guide</a></li>
-<li><a href="https://github.com/smooch/smooch-android/releases/tag/2.0.0" target="_blank">Android Upgrade Guide</a></li>
-<li><a href="https://github.com/smooch/smooch-js/releases/tag/2.0.0" target="_blank">Web SDK Upgrade Guide</a></li>
-</ul>
-
-          <h1 id='sending-action-buttons'>Sending action buttons</h1>
+          <h1 id='building-applications'>Building applications</h1>
 <p>You can send your users an action button with the following syntax:</p>
 <pre class="highlight plaintext"><code>%[Button label here](http://anyurl.com)
 </code></pre>
 
-<p>This works from any channel you configured to use with Smooch. </p>
-
-<p>When the user taps your button, we&rsquo;ll launch the appropriate intent based on the URL, so it can be whatever you want! Anything ranging from a web url, deep link or play store link works like a charm. </p>
-
-<p><span class="half-width-img"><img alt="Action buttons" src="images/action_button_android.png" /></span></p>
-
-<p><aside class="notice">
-Buttons will always be appended at the bottom of your message bubble.
-</aside></p>
-<h3 id='play-store-link'>Play store link</h3>
-<p>For a play store link, you&rsquo;ll need your app&rsquo;s package. The URL of your app&rsquo;s page in the play store will have your package name at the end. The link to use in the Action input will then be <code class="prettyprint">market://details?id=&lt;package_name&gt;</code></p>
-
-<p><img alt="Package Name" src="images/package_name_from_url.png" /></p>
-
-          <h1 id='sending-action-buttons'>Sending action buttons</h1>
-<p>You can send your users an action button with the following syntax:</p>
-<pre class="highlight plaintext"><code>%[Button label here](http://anyurl.com)
-</code></pre>
-
-<p>This works from any channel you configured to use with Smooch. </p>
+<p>This works from any channel you configured to use with Smooch.</p>
 
 <p>When the user taps your button, it&rsquo;ll open whatever link you specified in a new tab.</p>
 
@@ -108,24 +76,36 @@ Buttons will always be appended at the bottom of your message bubble.
 Buttons will always be appended at the bottom of your message bubble.
 </aside></p>
 
-          <h1 id='sending-action-buttons'>Sending action buttons</h1>
-<p>You can send your users an action button with the following syntax:</p>
-<pre class="highlight plaintext"><code>%[Button label here](http://anyurl.com)
-</code></pre>
+          <h1 id='connecting-devices'>Connecting Devices</h1>
+<p>So you have a network. How to create a device and connect it to The Things Network.</p>
 
-<p>This works from any channel you configured to use with Smooch. </p>
+          <h1 id='retrieving-your-data'>Retrieving your data</h1>
+<p>How to retrieve your data from The Things Network development servers.</p>
 
-<p>Your action URL can be anything accepted by <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplication_Class/#//apple_ref/occ/instm/UIApplication/openURL:"><code class="prettyprint">[[UIApplication sharedApplication] openURL:url];</code></a> So anything ranging from a web url, deep link into your app or app store link to ask for a review works like a charm. </p>
+          <h1 id='building-a-local-community'>Building a local community</h1>
+<p>This section will tell you all about building a community.</p>
 
-<p><img alt="Action buttons" src="images/action_button.png" /></p>
+<p>Team
+Having a team makes setting up your gateways much easier and more fun. Therefore I strongly recommend finding a few people that share your passion and can help setting up and managing your gateways.</p>
 
-<p><aside class="notice">
-Buttons will always be appended at the bottom of your message bubble.
-</aside></p>
-<h3 id='app-store-link'>App store link</h3>
-<p>For an app store link, you can get your app&rsquo;s App Store ID by finding it on <a href="https://linkmaker.itunes.apple.com">Link Maker</a>. The URL of your app&rsquo;s page will have your App Store ID at the end. The link to use in the Action input will then be <code class="prettyprint">itms-apps://itunes.apple.com/app/id[_yourAppIdHere_]</code></p>
+<p>As soon as you have set up your team, let me know so I can set you up with a campaign page (e.g. http://thethingsnetwork.org/c/buenosaires) and category on the forum. This will help you gather traction with sponsors and government.</p>
 
-<p><img alt="App Store ID" src="images/appstoreid_from_url.png" /></p>
+<p>Hardware
+There is a lot of LoRaWAN hardware out there. Here is a short overview, with specifications: http://thethingsnetwork.org/wiki/Hardware/OverviewGateways for gateways and http://thethingsnetwork.org/wiki/Hardware/OverviewNodes for nodes.</p>
+
+<p>The cheapest option is hardware we provide via a Kickstarter: kickstarter.com/projects/419277966/the-things-network Many teams order an other gateway for testing, setting up the network and find partners, as a proof of concept. For the final network they order hardware from the Kickstarter, which is cheaper and plug &amp; play.</p>
+
+<p>Connecting to TTN
+Without a connection to the network, your hardware is just a box with blinking lights. This page will get you started: http://thethingsnetwork.org/wiki/Software/Overview</p>
+
+<p>General information
+A lot of information on the different aspects can be found on our wiki http://thethingsnetwork.org/wiki/</p>
+
+<p>If your answer is not on it (yet), please consult the forum and post your questions: http://forum.thethingsnetwork.org/.</p>
+
+<p>It is a lot of information, why not get started on our wiki: http://thethingsnetwork.org/wiki/Getting-organized</p>
+
+<p>Let me know if there is anything I can do for you!</p>
 
       </div>
       <div class="dark-box">
