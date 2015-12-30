@@ -1,4 +1,4 @@
-# Sending action buttons
+# Building a local community
 
 You can send your users an action button with the following syntax:
 
@@ -6,9 +6,9 @@ You can send your users an action button with the following syntax:
 %[Button label here](http://anyurl.com)
 ```
 
-This works from any channel you configured to use with Smooch. 
+This works from any channel you configured to use with Smooch.
 
-When the user taps your button, we'll launch the appropriate intent based on the URL, so it can be whatever you want! Anything ranging from a web url, deep link or play store link works like a charm. 
+When the user taps your button, we'll launch the appropriate intent based on the URL, so it can be whatever you want! Anything ranging from a web url, deep link or play store link works like a charm.
 
 <span class="half-width-img">![Action buttons](/images/action_button_android.png)</span>
 

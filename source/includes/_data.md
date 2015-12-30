@@ -1,4 +1,4 @@
-# Building applications
+# Retrieving your data
 
 You can send your users an action button with the following syntax:
 

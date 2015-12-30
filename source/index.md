@@ -7,9 +7,10 @@ toc_footers:
 includes:
   - welcome
   - network
-  - community
+  - data
   - applications
   - devices
+  - community
 
 search: true
 api_docs_link: http://gettingstarted.thethingsnetwork.org
