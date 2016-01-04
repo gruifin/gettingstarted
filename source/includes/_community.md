@@ -2,25 +2,38 @@
 
 This section will tell you all about building a community.
 
-Team
+## Team
 Having a team makes setting up your gateways much easier and more fun. Therefore I strongly recommend finding a few people that share your passion and can help setting up and managing your gateways.
 
 As soon as you have set up your team, let me know so I can set you up with a campaign page (e.g. http://thethingsnetwork.org/c/buenosaires) and category on the forum. This will help you gather traction with sponsors and government.
 
-Hardware
-There is a lot of LoRaWAN hardware out there. Here is a short overview, with specifications: http://thethingsnetwork.org/wiki/Hardware/OverviewGateways for gateways and http://thethingsnetwork.org/wiki/Hardware/OverviewNodes for nodes.
+## Hardware
+There is a lot of LoRaWAN hardware out there. Here is a short overview, with specifications:
 
-The cheapest option is hardware we provide via a Kickstarter: kickstarter.com/projects/419277966/the-things-network Many teams order an other gateway for testing, setting up the network and find partners, as a proof of concept. For the final network they order hardware from the Kickstarter, which is cheaper and plug & play.
+* http://thethingsnetwork.org/wiki/Hardware/OverviewGateways for gateways
+* http://thethingsnetwork.org/wiki/Hardware/OverviewNodes for nodes.
 
-Connecting to TTN
-Without a connection to the network, your hardware is just a box with blinking lights. This page will get you started: http://thethingsnetwork.org/wiki/Software/Overview
+The cheapest option is hardware we provide via a Kickstarter:
 
-General information
-A lot of information on the different aspects can be found on our wiki http://thethingsnetwork.org/wiki/
+* http://kickstarter.com/projects/419277966/the-things-network
 
-If your answer is not on it (yet), please consult the forum and post your questions: http://forum.thethingsnetwork.org/.
+Many teams order an other gateway for testing, setting up the network and find partners, as a proof of concept. For the final network they order hardware from the Kickstarter, which is cheaper and plug & play.
 
-It is a lot of information, why not get started on our wiki: http://thethingsnetwork.org/wiki/Getting-organized
+## Connecting to TTN
+Without a connection to the network, your hardware is just a box with blinking lights. This page will get you started:
+* http://thethingsnetwork.org/wiki/Software/Overview
 
+## General information
+A lot of information on the different aspects can be found on our wiki:
+* http://thethingsnetwork.org/wiki/
 
-Let me know if there is anything I can do for you!
+If your answer is not on it (yet), please consult the forum and post your questions:
+
+* http://forum.thethingsnetwork.org/
+
+It is a lot of information, why not get started on our wiki:
+* http://thethingsnetwork.org/wiki/Getting-organized
+
+We did several Google Hangouts with regards to setting up a The Things Network community. Please find the show here:
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/FwPUcn0Vehk/0.jpg)](http://www.youtube.com/watch?v=FwPUcn0Vehk "Video Title")
