@@ -78,11 +78,24 @@
 Buttons will always be appended at the bottom of your message bubble.
 </aside></p>
 
-          <h1 id='connecting-devices'>Connecting Devices</h1>
-<p>So you have a network. How to create a device and connect it to The Things Network.</p>
+          <h1 id='connecting-devices'>Connecting devices</h1>
+<p>If you set up your own network as explained <a href="#setting-up-the-network">here</a> or if you are already in reach of The Things Network gateways, you can start connecting devices to the network.</p>
+
+<p>This section explains the configuration required for devices to connect to The Things Network, as well as step-by-step tutorials to build a simple prototype from scratch.</p>
+<h2 id='configuration'>Configuration</h2>
+<p>You can connect any LoRaWAN 1.0 compatible device to The Things Network. Since LoRa is a radio protocol, all packets are received by all gateways in reach that have a channel available. In order to identify your device, set the <code class="prettyprint">DevAddr</code> (device address) to any value you like.</p>
+
+<p>The demonstration back-end only processes packets encrypted with the public encryption keys. Use for both <code class="prettyprint">AppSKey</code> (application session key) and <code class="prettyprint">NwkSKey</code> (network session key) the key <code class="prettyprint">2B7E151628AED2A6ABF7158809CF4F3C</code>.</p>
+<h2 id='tutorials'>Tutorials</h2>
+<p>Follow these step-by-step tutorials to build your first prototype and connect it to The Things Network.</p>
+
+<ul>
+<li><a href="https://github.com/TheThingsNetwork/examples/tree/master/basic/autonomo/hello-world">Hello world</a> (SODAQ Autonomo and LoRabee RN2483)</li>
+<li><a href="https://github.com/TheThingsNetwork/examples/tree/master/basic/autonomo/proximity">Proximity</a> (SODAQ Autonomo, LoRabee RN2483 and Grove Ultrasonic Ranger)</li>
+</ul>
 
           <h1 id='retrieving-your-data'>Retrieving your data</h1>
-<p>How to retrieve your data from The Things Network development servers.</p>
+<p>How to retrieve your data from The Things Network demonstration back-end.</p>
 
           <h1 id='building-a-local-community'>Building a local community</h1>
 <p>This section will tell you all about building a community.</p>
