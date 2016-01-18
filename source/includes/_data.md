@@ -1,3 +1,2 @@
 # Retrieving your data
-
-How to retrieve your data from The Things Network development servers.
+How to retrieve your data from The Things Network demonstration back-end.
