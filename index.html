@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>The Things Network Getting Started</title>
+    <title>The Things Uno Getting Started</title>
 
     <link href="images/favicon.ico" rel="icon" type="image/ico" />
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
@@ -50,93 +50,418 @@
       <div class="content">
         
           <h1 id='welcome'>Welcome</h1>
-<p>This page tells you all about getting started with The Things Network.</p>
+<p>This tutorial will focus on setting up the Things Uno. During the tutorial you&rsquo;ll be introduced to the following subjects:</p>
 
 <ul>
-<li>How to build the network</li>
-<li>Connecting devices</li>
-<li>Building applications</li>
-<li>Retrieving your data</li>
-<li>Building a local community</li>
+<li>OTAA (Over The Air Activation) and ABP (Activation By Personalization) </li>
+<li>Setting up the Arduino IDE</li>
+<li>Programming the Things Uno</li>
+<li>Retrieving your data from the network</li>
 </ul>
+<h2 id='the-hardware'>The Hardware</h2>
+<table><thead>
+<tr>
+<th>The Things Uno</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><img style='max-width: 250px;' src="images/things-uno.jpg"></td>
+</tr>
+<tr>
+<td><a href="https://www.shop.thethingsnetwork.com">preorder now</a></td>
+</tr>
+</tbody></table>
+<h1 id='the-things-uno-i'>The Things Uno I</h1><h2 id='the-arduino-ide'>The Arduino IDE</h2>
+<p>The Arduino IDE with the Things Uno library is required.</p>
 
-          <h1 id='setting-up-the-network'>Setting up the Network</h1>
-<p>This section will tell something about setting up the network. The nature of this guide is technical.</p>
+<ol>
+<li> <a href="https://www.arduino.cc/en/Main/Software">Download</a> and install Arduino IDE 1.6.8 or newer (Windows, Mac OS X or Linux)</li>
+<li> <a href="https://github.com/TheThingsNetwork/sdk/blob/master/node/TheThingsUno/release/TheThingsUno.zip?raw=true">Download</a> the latest The Things Uno Arduino library (Zip)</li>
+<li> Navigate in the Arduino IDE to: sketch &gt; include library &gt; add .ZIP Library and select the zip file from step 2.</li>
+</ol>
+<h2 id='connect-the-things-uno'>Connect the Things Uno</h2>
+<ol>
+<li> Connect the Things Uno to your computer with a Micro-USB cable</li>
+<li> Select: <strong>Tools &gt; Board &gt; Arduino Leonardo</strong></li>
+<li> Select: <strong>Tools &gt; Port &gt; (The port that identifies as Arduino Leonardo)</strong></li>
+</ol>
+<h2 id='get-the-unique-node-eui'>Get the unique node EUI</h2>
+<p>The <code class="prettyprint">Device-EUI</code> is the unique node address that is hard coded by Microchip into the LoRa module. 
+This address is used to register the Node in The Things Network database. 
+The <code class="prettyprint">Device-EUI</code> can be retrieved from the node with the <code class="prettyprint">Get-Device-Info</code> sketch. </p>
 
-          <h1 id='building-applications'>Building applications</h1>
-<p>You can send your users an action button with the following syntax:</p>
-<pre class="highlight plaintext"><code>%[Button label here](http://anyurl.com)
+<ol>
+<li> In the Arduino IDE, open: <strong>File &gt; Examples &gt; TheThingsUno &gt; Get-Device-Info.ino</strong></li>
+<li> Upload sketch without modification.</li>
+</ol>
+<h2 id='uploading-sketch'>Uploading Sketch</h2>
+<ol>
+<li> Click <strong>Sketch &gt; Verify/Compile</strong> and make sure that compilation works (Arduino says Done compiling) Run Application</li>
+<li> Click <strong>Sketch &gt; Upload (Arduino says Done uploading)</strong></li>
+<li><p>The Arduino IDE will give feedback when you verify or upload the code to a board. It should look similar to this:</p>
+<pre class="highlight plaintext"><code>    Sketch uses 14,152 bytes (49%) of program storage space. Maximum is 28,672 bytes.
+    Global variables use 1,253 bytes (48%) of dynamic memory, leaving 1,307 bytes for local variables. Maximum is 2,560 bytes.
+</code></pre></li>
+</ol>
+
+<p><aside class = 'success'>
+    Congratulations, you have successfully configured your first Things Uno.
+</aside></p>
+<h2 id='serial-monitor'>Serial Monitor</h2>
+<p>The Things Uno talks to the computer over the Serial Port. 
+The data that is send is displayed with the <code class="prettyprint">Serial monitor</code> of the Arduino IDE. 
+Using the <code class="prettyprint">Serial monitor</code> makes it possible to monitor the proceedings of the Things Uno.</p>
+
+<ol>
+<li>Connect the Things Uno to your computer</li>
+<li><p>Open the serial monitor in the Arduino IDE</p>
+
+<p>Press the Serial monitor button or press <strong>Crtl + Shift + M</strong></p></li>
+<li><p>Receiving data on the Serial Monitor</p>
+
+<p>&ldquo;`
+    Device Information</p>
+
+<p>EUI: 0004A30B001B672E
+    Battery: 3304
+    AppEUI: 0000000000000000
+    DevEUI: 0004A30B001B672E
+    DevAddr: 00000000
+    Data Rate: 5
+    RX Delay 1: 1000
+    RX Delay 2: 2000</p>
+
+<p>use the device <code class="prettyprint">EUI</code> to register the device for OTAA 
+    &rdquo;`</p></li>
+<li><p>Save the <code class="prettyprint">EUI: 0004A30B001B672E</code> (<code class="prettyprint">Device-EUI</code>) for later.    </p></li>
+</ol>
+
+<p><aside class='success'>
+    Congratulations, you have successfully retrieved the Device-EUI from your Things Uno
+</aside></p>
+<h1 id='the-things-network-control-utility'>The Things Network Control Utility</h1>
+<p>You need to register every application that sends data through The Things Network. 
+This is done with the <code class="prettyprint">ttnctl</code> (The Things Network control utility) .</p>
+<h2 id='download-and-install'>Download and install</h2>
+<ol>
+<li> Download The Things Network control utility ttnctl (for Windows <a href="https://ttnreleases.blob.core.windows.net/release/src/github.com/TheThingsNetwork/ttn/release/branch/develop/ttnctl-windows-amd64.zip">64 bit</a>/<a href="https://ttnreleases.blob.core.windows.net/release/src/github.com/TheThingsNetwork/ttn/release/branch/develop/ttnctl-windows-386.zip">32 bit</a>, Linux <a href="https://ttnreleases.blob.core.windows.net/release/src/github.com/TheThingsNetwork/ttn/release/branch/develop/ttnctl-linux-amd64.zip">64 bit</a>/<a href="https://ttnreleases.blob.core.windows.net/release/src/github.com/TheThingsNetwork/ttn/release/branch/develop/ttnctl-linux-386.zip">32 bit</a> or <a href="https://ttnreleases.blob.core.windows.net/release/src/github.com/TheThingsNetwork/ttn/release/branch/develop/ttnctl-darwin-amd64.zip">Mac OS X</a>.</li>
+<li> Extract the downloaded ZIP file to a convenient location, e.g. your user directory (<code class="prettyprint">%USERPROFILE%</code> on Windows or <code class="prettyprint">$HOME</code> on Mac OS X and Linux);</li>
+<li> Verify that the command utility works by executing the command line utility:</li>
+</ol>
+<pre class="highlight plaintext"><code>./ttnctls-darwin-amd64
+ttnctl controls The Things Network from the command line.
+
+Usage:
+    ttnctl [command]
+</code></pre>
+<h2 id='create-account'>Create Account</h2>
+<p>To use the <code class="prettyprint">ttnctl</code> tool, you need a user account. This is a personal account. Your login name is your e-mail address and you are free to choose a password of your choice.</p>
+
+<ol>
+<li> Create a new user account by executing: <code class="prettyprint">ttnctl user create demo@thethingsnetwork.org</code>
+
+<ul>
+<li>Now enter twice your password (the ).</li>
+</ul></li>
+<li> Login with your new account: <code class="prettyprint">ttnctl user login demo@thethingsnetwork.org</code></li>
+</ol>
+<pre class="highlight plaintext"><code>ttnctl user create example@thethingsnetwork.org
+password:
+    INFO User created
+ttnctl user login example@thethingsnetwork.org
+password:
+    INFO logged in as example@thethingsnetwork.org and persisted token in /user/&lt;username&gt;/.ttnctl/auths.json
+</code></pre>
+<h2 id='create-application'>Create Application</h2>
+<p>Users can create applications which have a unique identifier. Its the EUI number issued by The Things Network.</p>
+
+<ol>
+<li> Create your first The Things Network application: <code class="prettyprint">ttnctl applications create &quot;Hello world&quot;</code></li>
+<li> View your applications: <code class="prettyprint">ttnctl applications</code>. When you register a app, it is given an unique <code class="prettyprint">application-EUI</code>.</li>
+<li> Note that the <code class="prettyprint">Application EUI</code> and its <code class="prettyprint">access key</code> are used to access the data from The Things Network later on this tutorial.</li>
+<li> Use your newly created application: <code class="prettyprint">ttnctl applications use &lt;application-EUI&gt;</code></li>
+</ol>
+<pre class="highlight plaintext"><code>ttn applications create 'Hello world'
+    INFO Application created successfully
+
+ttn applications
+    INFO Found 1 application(s)
+EUI                 Name            Owner                               access Keys                                    Valid 
+70B3D57ED0000002    Hello world     example@thethingsnetwork.org       vTFYb/DjtdnUAWUHaGKDw3Lt/3T4C9MiWLYRzSX+eBU=    true
+
+ttnctl applications use 70B3D57ED0000002
+    INFO You are now using application 70B3D57ED0000002.
+</code></pre>
+<h2 id='register-device'>Register Device</h2>
+<p>All devices on the network need to be registered in The Things Network database. 
+In the application devices are registered and managed.</p>
+
+<p>The Things Network supports the two LoRaWAN mechanisms to register devices: over the air activation (OTAA) and activation by personalization (ABP). 
+It is strongly advised to use OTAA for production and ABP for development. This is because of the following benefits that OTAA has over ABP:</p>
+
+<ul>
+<li>APB uses a frame counter as protection against data spam. This counter counts both on hardware as on the network how much packages are send/received. 
+When both counters match, access to the network is granted. While there is a way to <a href="http://staging.thethingsnetwork.org/wiki/Backend/ttnctl/ttnctl_devices_register_personalized">bypass</a> this issue, it makes the connecting insecure.</li>
+</ul>
+<h3 id='otaa'>OTAA</h3>
+<ol>
+<li> Look up your <code class="prettyprint">device-EUI</code> (<code class="prettyprint">8-byte Device-address</code>) that you retrieved form your Things Uno.
+
+<ul>
+<li>The device EUI should be similar to this <code class="prettyprint">02DE002B02DE002B</code>.</li>
+</ul></li>
+<li> Register your device: <code class="prettyprint">ttnctl devices register &lt;device-EUI&gt;</code></li>
+<li> Get your device information: <code class="prettyprint">ttnctl devices info &lt;device-EUI&gt;</code></li>
+</ol>
+<pre class="highlight plaintext"><code>ttnctl devices register  02DE000002DE0000
+    INFO Generating random AppKey...
+    INFO Registered device
+
+ttnctl devices info 02DE000002DE0000
+Dynamic device:
+
+  AppEUI:  70B3D57ED000014B
+           {0x70, 0xB3, 0xD5, 0x7E, 0xD0, 0x00, 0x01, 0x4B}
+
+  DevEUI:  02DE000002DE0000
+           {0x02, 0xDE, 0x00, 0x00, 0x02, 0xDE, 0x00, 0x00}
+
+  AppKey:  527E0ABBE8BC0612C18A9D5457D93FD4
+           {0x52, 0x7E, 0x0A, 0xBB, 0xE8, 0xBC, 0x06, 0x12, 0xC1, 0x8A, 0x9D, 0x54, 0x57, 0xD9, 0x3F, 0xD4}
+
+  Not yet activated
+</code></pre>
+<h3 id='abp'>ABP</h3>
+<ol>
+<li> Choose your <code class="prettyprint">Device-address</code> (<code class="prettyprint">4-byte  Device-address</code>) that is not yet <a href="http://staging.thethingsnetwork.org/wiki/Legacy/AddressSpace">reserved</a>. For example <code class="prettyprint">02DE002B</code>.</li>
+<li> Register your device: <code class="prettyprint">ttnctl devices register personalized &lt;Device-address&gt;</code></li>
+<li> Get your device information: <code class="prettyprint">ttnctl devices info &lt;Device-address&gt;</code></li>
+</ol>
+<pre class="highlight plaintext"><code>ttnctl devices register personalization  02DE0000
+    INFO Generating random NwkSey and AppSKey...
+    INFO Registered personalized device
+
+ttnctl devices info 02DE0000
+personalized devivce:
+
+    DevAddr: 02DE0000
+             {0x02, 0xDE, 0x00, 0x00}
+
+    NwkSKey: 028F7B7A52BA029DE2F2C2087F8E016B
+             {0x02, 0x8F, 0x7B, 0x7A, 0x52, 0xBA, 0x02, 0x9D, 0xE2, 0xF2, 0xC2, 0x08, 0x7F, 0x8E, 0x01, 0x6B};
+
+    AppSKey: D6F3521E492C983D0B65A82DED12221C
+             {0xD6, 0xF3, 0x52, 0x1E, 0x49, 0x2C, 0x98, 0x3D, 0x0B, 0x65, 0xA8, 0x2D, 0xED, 0x12, 0x22, 0x1C};
+
+    FCntUp:     0
+    FCntDn:     0
+</code></pre>
+<h1 id='the-things-uno-ii'>The Things Uno II</h1><h2 id='programming-the-hardware'>Programming the Hardware</h2>
+<p>Earlier you registered your device with <code class="prettyprint">OTAA</code> or <code class="prettyprint">ABP</code>. Each of these registration methods joins the network in a different way. 
+Choose the right join method below for your hardware.</p>
+<h3 id='otaa'>(OTAA)</h3>
+<ol>
+<li> In the Arduino IDE, open <strong>File &gt; Examples &gt; TheThingsUno &gt; hello-world-OTAA.ino</strong></li>
+<li> Change your <code class="prettyprint">appEui</code> and <code class="prettyprint">appKey</code> to the values of your device. </li>
+<li> Copy/paste the pre made codes <code class="prettyprint">( {0x70, 0xB3, 0xD5, 0x7E, 0xE0, 0xE0, 0x01, 0x4A} )</code> values that ttnctl printed for you in the previous steps.</li>
+</ol>
+<pre class="highlight c"><code><span class="c1">// Set your app Credentials
+</span><span class="k">const</span> <span class="n">byte</span> <span class="n">appEui</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x70</span><span class="p">,</span> <span class="mh">0xB3</span><span class="p">,</span> <span class="mh">0xD5</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0xE0</span><span class="p">,</span> <span class="mh">0xE0</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x4A</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">byte</span> <span class="n">appKey</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x2B</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0xAE</span><span class="p">,</span> <span class="mh">0xD2</span><span class="p">,</span> <span class="mh">0xA6</span><span class="p">,</span> <span class="mh">0xAB</span><span class="p">,</span> <span class="mh">0xF7</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0xCF</span><span class="p">,</span> <span class="mh">0x4F</span><span class="p">,</span> <span class="mh">0x3C</span><span class="p">};</span>
 </code></pre>
 
-<p>This works from any channel you configured to use with Smooch.</p>
+<ol>
+<li>Upload the sketch</li>
+</ol>
+<h3 id='abp'>(ABP)</h3>
+<ol>
+<li> In the Arduino IDE, open: <strong>File &gt; Examples &gt; TheThingsUno &gt; hello-world-ABP.ino</strong></li>
+<li> Change your <code class="prettyprint">devAddr</code>, <code class="prettyprint">nwkSKey</code> and <code class="prettyprint">appSKey</code>to the values of your device. </li>
+<li> Copy/paste the pre made codes <code class="prettyprint">( {0x02, 0xDE, 0x00, 0x00} )</code> values that ttnctl printed for you in the previous steps.</li>
+</ol>
+<pre class="highlight c"><code><span class="c1">// Set your device address
+</span><span class="k">const</span> <span class="n">byte</span> <span class="n">devAddr</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x02</span><span class="p">,</span> <span class="mh">0xDE</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">};</span>
 
-<p>When the user taps your button, it&rsquo;ll open whatever link you specified in a new tab.</p>
+<span class="c1">// Set your NwkSKey and AppSKey
+</span><span class="k">const</span> <span class="n">byte</span> <span class="n">nwkSKey</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x8F</span><span class="p">,</span> <span class="mh">0x7B</span><span class="p">,</span> <span class="mh">0x7A</span><span class="p">,</span> <span class="mh">0x52</span><span class="p">,</span> <span class="mh">0xBA</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x9D</span><span class="p">,</span> <span class="mh">0xE2</span><span class="p">,</span> <span class="mh">0xF2</span><span class="p">,</span> <span class="mh">0xC2</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span> <span class="mh">0x7F</span><span class="p">,</span> <span class="mh">0x8E</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">,</span> <span class="mh">0x6B</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">byte</span> <span class="n">appSKey</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0xD6</span><span class="p">,</span> <span class="mh">0xF3</span><span class="p">,</span> <span class="mh">0x52</span><span class="p">,</span> <span class="mh">0x1E</span><span class="p">,</span> <span class="mh">0x49</span><span class="p">,</span> <span class="mh">0x2C</span><span class="p">,</span> <span class="mh">0x98</span><span class="p">,</span> <span class="mh">0x3D</span><span class="p">,</span> <span class="mh">0x0B</span><span class="p">,</span> <span class="mh">0x65</span><span class="p">,</span> <span class="mh">0xA8</span><span class="p">,</span> <span class="mh">0x2D</span><span class="p">,</span> <span class="mh">0xED</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x1C</span><span class="p">};</span>
+</code></pre>
 
-<p><span class="half-width-img"><img alt="Action buttons" src="images/action_button_web.png" /></span></p>
+<ol>
+<li>Upload the sketch</li>
+</ol>
+<h2 id='serial-monitor'>Serial Monitor</h2>
+<ol>
+<li>Open the serial monitor in the Arduino IDE</li>
+<li><p>receiving data on the Serial Monitor</p>
+<pre class="highlight plaintext"><code>Initializing...
+Version is RN2483 1.0.1 Dec 15 2015 09:38:09, model is RN2483
+Sending: mac set adr on
+Sending: mac set pwridx 1
+Sending: mac set dr 5
 
-<p><aside class="notice">
-Buttons will always be appended at the bottom of your message bubble.
+//for ABP
+Sending: mac set devaddr with 4 bytes
+Sending: mac set nwkskey with 16 bytes
+Sending: mac set appskey with 16 bytes
+Sending: mac join abp
+Personalize accepted. Status: 00000021
+EUI: 0004A30B001B672E
+Battery: 3304
+AppEUI: 0000000000000000
+DevEUI: 0004A30B001B672E
+DevAddr: 02DE0000
+
+//for OTAA
+Sending: mac set appeui with 8 bytes
+Sending: mac set deveui 0004A30B001B672E
+Sending: mac set appkey with 16 bytes
+Sending: mac join otaa
+Join accepted: accepted. Status: 00000421
+EUI: 0004A30B001B672E
+Battery: 3304
+AppEUI: 70B3D57ED000014A
+DevEUI: 0004A30B001B672E
+DevAddr: 1D86A4A
+
+Band: 868
+Data Rate: 5
+RX Delay 1: 1000
+RX Delay 2: 2000
+Setup for The Things Network complete
+</code></pre>
+
+<p>After the initializing it will confirm every message being sent:</p>
+<pre class="highlight plaintext"><code>Sending: mac tx uncnf 1 with 1 bytes
+Successful transmission
+</code></pre></li>
+</ol>
+
+<p><aside class='success'>
+    Congratulations, you have successfully sent your first data over The Things Network
 </aside></p>
+<h1 id='retrieving-the-data'>Retrieving the data</h1>
+<p>Now that the hardware transmits the data to the network, it can be retrieved by the TTN MQTT broker. We&rsquo;ll use Node-RED to retrieve the data from the TTN server.</p>
+<h2 id='node-red'>Node-RED</h2>
+<p>Node-RED is a JavaScript-based server with a web GUI. The interface makes it possible to build a complete server by wiring flows together in a web interface. 
+It is free and comes with lots of pre made plugins like API’s, online services and lots of ready to use tools.</p>
 
-          <h1 id='connecting-devices'>Connecting devices</h1>
-<p>If you set up your own network as explained <a href="#setting-up-the-network">here</a> or if you are already in reach of The Things Network gateways, you can start connecting devices to the network.</p>
+<ol>
+<li>Host your own <a href="http://nodered.org/docs/">version of Node-RED</a>. </li>
+<li><p>Boot Node-RED by entering <code class="prettyprint">node-red</code> in your command line. </p>
+<pre class="highlight plaintext"><code>node-red
 
-<p>This section explains the configuration required for devices to connect to The Things Network, as well as step-by-step tutorials to build a simple prototype from scratch.</p>
-<h2 id='configuration'>Configuration</h2>
-<p>You can connect any LoRaWAN 1.0 compatible device to The Things Network. Since LoRa is a radio protocol, all packets are received by all gateways in reach that have a channel available. In order to identify your device, set the <code class="prettyprint">DevAddr</code> (device address) to any value you like.</p>
+Welcome to Node-RED
+===================
 
-<p>The demonstration back-end only processes packets encrypted with the public encryption keys. Use for both <code class="prettyprint">AppSKey</code> (application session key) and <code class="prettyprint">NwkSKey</code> (network session key) the key <code class="prettyprint">2B7E151628AED2A6ABF7158809CF4F3C</code>.</p>
-<h2 id='tutorials'>Tutorials</h2>
-<p>Follow these step-by-step tutorials to build your first prototype and connect it to The Things Network.</p>
+9 May 15:15:29 - [info] Node-RED version: v0.13.4
+9 May 15:15:29 - [info] Node.js  version: v4.4.3
+9 May 15:15:29 - [info] Windows_NT 6.3.9600 x64 LE
+9 May 15:15:29 - [info] Loading palette nodes
+9 May 15:15:31 - [warn] ------------------------------------------
+9 May 15:15:31 - [warn] Failed to register 2 node types
+9 May 15:15:31 - [warn] Run with -v for details
+9 May 15:15:31 - [warn] ------------------------------------------
+9 May 15:15:31 - [info] Settings file  : C:\Users\ludo\AppData\Roaming\npm\node_modules\node-red\settings.js
+9 May 15:15:31 - [info] User directory : C:\Users\ludo\.node-red
+9 May 15:15:31 - [info] Flows file : C:\Users\ludo\.node-red\flows_Ludo-ROG.json
+9 May 15:15:31 - [info] Creating new flow file
+9 May 15:15:31 - [info] Starting flows
+9 May 15:15:31 - [info] Started flows
+9 May 15:15:31 - [info] Server now running at http://127.0.0.1:1880/
+</code></pre></li>
+</ol>
 
-<ul>
-<li><a href="https://github.com/TheThingsNetwork/examples/tree/master/basic/autonomo/hello-world">Hello world</a> (SODAQ Autonomo and LoRabee RN2483)</li>
-<li><a href="https://github.com/TheThingsNetwork/examples/tree/master/basic/autonomo/proximity">Proximity</a> (SODAQ Autonomo, LoRabee RN2483 and Grove Ultrasonic Ranger)</li>
-</ul>
+<p>Navigate to your browser and enter the url (http://127.0.0.1:1880/) that is given by the Node-RED application. You should see the following web page:</p>
 
-          <h1 id='retrieving-your-data'>Retrieving your data</h1>
-<p>How to retrieve your data from The Things Network demonstration back-end.</p>
+<p><img style='display:inline;' src="images/node-red.png"></p>
+<h2 id='building-the-data-flow'>Building the data flow</h2>
+<ol>
+<li>Open up your Node-RED.</li>
+<li><p>Now build the flow by placing the following block from the left component window in your sketch:</p>
 
-          <h1 id='building-a-local-community'>Building a local community</h1>
-<p>This section will tell you all about building a community.</p>
-<h2 id='team'>Team</h2>
-<p>Having a team makes setting up your gateways much easier and more fun. Therefore I strongly recommend finding a few people that share your passion and can help setting up and managing your gateways.</p>
+<ol>
+<li><p>Get the mqtt component:         <strong>input &gt; &lsquo;mqtt&rsquo;</strong>.</p>
 
-<p>As soon as you have set up your team, let me know so I can set you up with a campaign page (e.g. http://thethingsnetwork.org/c/buenosaires) and category on the forum. This will help you gather traction with sponsors and government.</p>
-<h2 id='hardware'>Hardware</h2>
-<p>There is a lot of LoRaWAN hardware out there. Here is a short overview, with specifications:</p>
+<p><img style='display:inline;' src="images/mqtt-comp.png">       </p></li>
+<li><p>Get your json component:      <strong>function &gt; &lsquo;Json&rsquo;</strong>.</p>
 
-<ul>
-<li>http://thethingsnetwork.org/wiki/Hardware/OverviewGateways for gateways</li>
-<li>http://thethingsnetwork.org/wiki/Hardware/OverviewNodes for nodes.</li>
-</ul>
+<p><img style='display:inline;' src="images/json-comp.png"> </p></li>
+<li><p>Get your function component:   <strong>function &gt; &lsquo;function&rsquo;</strong></p>
 
-<p>The cheapest option is hardware we provide via a Kickstarter:</p>
+<p><img style='display:inline;' src="images/function-comp.png"></p></li>
+<li><p>Get your Debug component:      <strong>output &gt; &lsquo;Debug&rsquo;</strong></p>
 
-<ul>
-<li>http://kickstarter.com/projects/419277966/the-things-network</li>
-</ul>
+<p><img style='display:inline;' src="images/debug-comp.png"></p></li>
+</ol></li>
+<li><p>Now connect all the components together as listed above.</p>
 
-<p>Many teams order an other gateway for testing, setting up the network and find partners, as a proof of concept. For the final network they order hardware from the Kickstarter, which is cheaper and plug &amp; play.</p>
-<h2 id='connecting-to-ttn'>Connecting to TTN</h2>
-<p>Without a connection to the network, your hardware is just a box with blinking lights. This page will get you started:
-* http://thethingsnetwork.org/wiki/Software/Overview</p>
-<h2 id='general-information'>General information</h2>
-<p>A lot of information on the different aspects can be found on our wiki:
-* http://thethingsnetwork.org/wiki/</p>
+<p><img style='display:inline;' src="images/flow.png"> </p></li>
+<li><p>Configure the <code class="prettyprint">mqtt component</code>:</p>
 
-<p>If your answer is not on it (yet), please consult the forum and post your questions:</p>
+<ol>
+<li>Double-click the <code class="prettyprint">mqtt component</code></li>
+<li>Click on the pencil icon</li>
+<li><p><strong>under connection:</strong>*   Enter for server:   <code class="prettyprint">staging.thethingsnetwork.org</code></p>
 
-<ul>
-<li>http://forum.thethingsnetwork.org/</li>
-</ul>
+<p><img style='display:inline;' src="images/connection.png"></p></li>
+<li><p><strong>under security:</strong>      Enter for Username: <code class="prettyprint">your AppEui</code></p></li>
+<li><p><strong>under security:</strong>      Enter for password: <code class="prettyprint">the corresponding access Key</code></p>
 
-<p>It is a lot of information, why not get started on our wiki:
-* http://thethingsnetwork.org/wiki/Getting-organized</p>
+<p>The <code class="prettyprint">AppEui</code> and <code class="prettyprint">access key</code> can be looked up in the <a href="http://gruifin.github.io/cookbook/the-things-uno/#create-application">ttnctl tool</a>.</p>
 
-<p>We did several Google Hangouts with regards to setting up a The Things Network community. Please find the show here:</p>
+<p><img style='display:inline;' src="images/security.png"></p></li>
+<li><p>Click the <strong>update</strong> button</p></li>
+<li><p>Enter for Topic: <code class="prettyprint">+/devices/+/up</code></p>
 
-<p><a title="Video Title" href="http://www.youtube.com/watch?v=FwPUcn0Vehk"><img alt="IMAGE ALT TEXT" src="http://img.youtube.com/vi/FwPUcn0Vehk/0.jpg" /></a></p>
+<p><img style='display:inline;' src="images/mqtt.png"></p></li>
+</ol></li>
+<li><p>Configure the <code class="prettyprint">function component</code></p>
+
+<ol>
+<li>Double-click the <code class="prettyprint">function component</code></li>
+<li>add the following code to your function</li>
+<li><p>Click the Ok button</p>
+
+<p><img style='display:inline;' src="images/function-ex.png"></p></li>
+</ol>
+<pre class="highlight plaintext"><code>var text = new Buffer(msg.payload.payload, 'base64').toString();
+return {
+    payload: text
+}
+</code></pre></li>
+<li><p>Click the <strong>Deploy</strong> button at the right top of your window. Your data flow should look </p>
+
+<p><img style='display:inline;' src="images/deploy.png"></p></li>
+<li><p>You should get a message that the sketch is successfully deployed.</p>
+
+<p><img style='display:inline;' src="images/deploy-ok.png"></p></li>
+</ol>
+
+<p><aside class = 'success'>
+    Congratulations, you have successfully build your first Node-RED flow.<br>
+</aside></p>
+<h2 id='retrieve-the-data'>Retrieve the data</h2>
+<p>Now that the Things Uno is sending data it&rsquo;ll be received in the Node-RED data flow.</p>
+
+<ol>
+<li><p>Make sure that the green checkbox on the <code class="prettyprint">Debug</code> block is checked.</p>
+
+<p><img style='display:inline;' src="images/debug-check.png"></p></li>
+<li><p>Make sure that the mqtt input block reports: <code class="prettyprint">connected</code>.</p>
+
+<p><img style='display:inline;' src="images/mqtt-cnnt.png"></p></li>
+<li><p>Navigate to the right side of the Node-RED page and open the <code class="prettyprint">Debug</code> tab.</p>
+
+<p><img style='display:inline;' src="images/debug-tab.png"></p></li>
+<li><p>Now you should see the messages that the node transmits.</p>
+
+<p><img style='display:inline;' src="images/message.png"></p></li>
+</ol>
+
+<p><aside class = 'success'>
+    Congratulations, you have successfully received your first data over The Things Network
+</aside></p>
 
       </div>
       <div class="dark-box">
