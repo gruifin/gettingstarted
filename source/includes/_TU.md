@@ -16,7 +16,7 @@ This tutorial will focus on setting up the Things Uno. During the tutorial you'l
 
 
 
-#The Things Uno I
+#The Things Uno Dev-EUI
 
 ##The Arduino IDE
 
@@ -214,7 +214,7 @@ personalized device:
     FCntDn:     0
 ```
 
-#The Things Uno II
+#Connect to the network
 
 ##Programming the Hardware
 
